@@ -1,0 +1,18 @@
+{% extends 'template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/create-new.css">
+{% endblock %}
+
+{% block body %}
+    {% if good %}
+        <div style="text-align: center;font-size: 30px;font-weight: bold;color: white;margin-top: 10px;">Створено !</div>
+    {% endif %}
+    <form method="post" class="form-create" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="заголовок">
+        <textarea placeholder="текст" name="text"></textarea>
+        <input type="file" name="img" accept="image/*">
+        <button>створити</button>
+    </form>
+{% endblock %}

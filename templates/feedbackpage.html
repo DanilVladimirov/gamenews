@@ -1,0 +1,18 @@
+{% extends 'template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/create-new.css">
+{% endblock %}
+
+{% block body %}
+    {% if good %}
+        <div style="text-align: center;font-size: 30px;font-weight: bold;color: white;margin-top: 10px;color: #151e27;">Відправлено !</div>
+    {% endif %}
+    <div style="text-align: center;font-size: 30px;font-weight: bold;color: white;margin-top: 10px;">Запитайте в нас</div>
+    <form method="post" class="form-create">
+        {% csrf_token %}
+        <input type="text" name="theme" placeholder="заголовок">
+        <textarea placeholder="текст" name="text"></textarea>
+        <button style="width: 120px;">Відправити</button>
+    </form>
+{% endblock %}

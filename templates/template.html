@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/styles/template.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>var csrf_token = $('{% csrf_token %}').val(); </script>
+    {% block styles %}
+    {% endblock %}
+</head>
+<body>
+<div style="font-size: 40px;color: #151e27;font-weight: bold;text-align: center;">Game News</div>
+<div style="text-align: center;">
+    <nav style="display: inline-flex;">
+        <a href="{% url 'startpage' %}">Головна</a>
+        <a href="{% url 'newspage' %}">Новини</a>
+        <a href="{% url 'videos' %}">Відео</a>
+        <a href="{% url 'feedback_page' %}">Соціальні мережі</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout_user' %}">вийти</a>
+        {% else %}
+            <a href="{% url 'login_user' %}">війти</a>
+        {% endif %}
+        <form method="get" action="{% url 'search_page' %}">
+            <input type="text" name="stext" placeholder="пошук">
+        </form>
+        <div class="animation start-home"></div>
+    </nav>
+</div>
+{% block body %}
+{% endblock %}
+</body>
+</html>

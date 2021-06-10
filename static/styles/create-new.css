@@ -1,0 +1,51 @@
+.form-create {
+    width: 600px;
+    margin: auto;
+    display: grid;
+    margin-top: 30px;
+    background: #202e3c;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.form-create input[type="text"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+}
+
+.form-create input[type="file"] {
+    margin-bottom: 10px;
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
+.form-create textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: none;
+    max-width: 580px;
+    min-width: 580px;
+    width: 580px;
+    font-size: 18px;
+}
+
+
+.form-create button {
+    width: 100px;
+    padding: 5px;
+    font-size: 18px;
+    background: #2c3e51;
+    color: white;
+    border: none;
+    border-radius: 10px;
+
+}
+
+.form-create button:hover {
+    background: #233242;
+}

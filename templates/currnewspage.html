@@ -1,0 +1,80 @@
+{% extends 'template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/new-style.css">
+{% endblock %}
+
+{% block body %}
+    <div class="new-title">{{ news.title }}</div>
+    <div class="new-info">{{ news.date|date:'Y-m-d H:i' }} - {{ news.author.first_name }} {{ news.author.last_name }}</div>
+    <div class="new-img"><img src="{{ news.img.url }}"></div>
+    <div class="new-text">{{ news.text|safe }}</div>
+
+    {% if request.user.is_authenticated %}
+        <div class="enter-comment">
+            <textarea style="" id="comment_text" required>коментар</textarea>
+            <button onclick="add_comment()">відправити</button>
+        </div>
+    {% else %}
+        <div class="enter-comment">
+            <div style="font-size: 20px;color: white;">Щоб додавати кометарі <a href="{% url 'login_user' %}">увідіть</a></div>
+        </div>
+    {% endif %}
+
+    <div id="comms">
+        {% for comm in comms %}
+            <div class="comm" id="comment_{{ comm.id }}">
+                <div class="comm-author">{{ comm.author.first_name }} {{ comm.author.last_name }}
+                    {% load newstags %}
+                    {% if request.user|has_group:"moder" %}
+                        <button onclick="del_comment({{ comm.id }})">видалити</button>
+                    {% endif %}
+                </div>
+                <div>{{ comm.text }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    <script>
+
+        function del_comment(comm_id) {
+            $.ajax({
+                type: 'POST', url: '{% url "del_comm" %}',
+                data: {'csrfmiddlewaretoken': csrf_token, 'comm_id': comm_id},
+                dataType: 'json',
+                cache: false,
+                success: function (data) {
+                    if (data.success) {
+                        var comm = "#comment_" + comm_id;
+                        $(comm).remove();
+                    } else {
+
+                    }
+                }
+            });
+        }
+
+        function add_comment() {
+            var comment_text = $('#comment_text').val();
+            if (comment_text !== '') {
+                $.ajax({
+                    type: 'POST', url: '{% url "add_comm" %}',
+                    data: {'csrfmiddlewaretoken': csrf_token, 'comment_text': comment_text, 'newsid': {{ news.id }}},
+                    dataType: 'json',
+                    cache: false,
+                    success: function (data) {
+                        if (data.success) {
+                            var comms_div = document.getElementById('comms');
+                            var first = comms_div.childNodes[0];
+                            var $comment = $('<div class="comm" id=' + data.comm_id + '>' + '<div class="comm-author">{{ request.user.first_name }} {{ request.user.last_name }}</div>' + '<div>' + data.comment_text + '</div>' + '</div>');
+                            $comment.insertBefore(first);
+                        } else {
+
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+{% endblock %}

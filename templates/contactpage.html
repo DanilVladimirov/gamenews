@@ -1,0 +1,15 @@
+{% extends 'template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/contactpage.css">
+{% endblock %}
+
+{% block body %}
+
+    <form class="myform" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button>submit</button>
+    </form>
+
+{% endblock %}

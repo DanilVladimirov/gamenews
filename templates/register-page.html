@@ -1,0 +1,22 @@
+{% extends 'template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/registerstyles.css">
+{% endblock %}
+
+{% block body %}
+    <div style="text-align: center;font-size: 30px;">Реєстрація</div>
+
+    <form class="login" method="post">
+        {% csrf_token %}
+        <a href="{% url 'login_user' %}" >ввійти</a>
+        <input type="text" placeholder="логін" name="username" id="id_username" required>
+        <input type="text" placeholder="ім'я" name="first_name" id="id_first_name" required>
+        <input type="text" placeholder="призвіще" name="last_name" id="id_username" required>
+        <input type="email" placeholder="пошта" name="email" id="id_email">
+        <input type="password" placeholder="пароль" name="password1" required>
+        <input type="password" placeholder="повторіть пароль" name="password2" required>
+        <button type="submit" style="width: 200px;">зареєструватись</button>
+    </form>
+
+{% endblock %}

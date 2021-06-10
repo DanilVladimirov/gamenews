@@ -1,0 +1,25 @@
+{% extends 'template.html' %}
+
+{% block styles %}
+    <link rel="stylesheet" href="/static/styles/news.css">
+{% endblock %}
+
+{% block body %}
+    {% load newstags %}
+    {% if request.user|has_group:'redactor' %}
+        <div class="top-div">
+            <button class="button-create" onclick="location.href='{% url 'create_video' %}'">створити</button>
+        </div>
+    {% endif %}
+
+    <div style="margin-top: 10px;">
+        {% for post in videos %}
+            <div class="new-card" onclick="location.href='{% url 'video' post.id %}'">
+                <div class="new-title">{{ post.title }}</div>
+                <div><img src="{{ post.title_img.url }}"></div>
+                <div class="new-card-info">{{ post.date|date:'Y-m-d H:i' }}
+                    - {{ post.author.first_name }} {{ post.author.last_name }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

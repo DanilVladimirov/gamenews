@@ -1,0 +1,35 @@
+{% extends 'template.html' %}
+
+{% block styles %}
+
+{% endblock %}
+
+
+{% block body %}
+    <div style="text-align: center;font-size: 30px;font-weight: bold;color: white;margin-top: 10px;">Останні новини
+    </div>
+    <div style="display: flex;justify-content: center;">
+        {% for post in news %}
+            <div style="color: white;width: 250px;background: #202e3c;border-radius: 10px;padding: 10px;margin: 10px;"
+                 onclick="location.href='{% url 'currnews' post.id %}'">
+                <div style="font-size: 20px;font-weight: bold;">{{ post.title }}</div>
+                <div><img style="width: 100%;border-radius: 10px;" src="{{ post.img.url }}"></div>
+                <div style="color: #507194;font-size: 15px;">{{ post.date|date:'Y-m-d H:i' }}
+                    - {{ post.author.first_name }} {{ post.author.last_name }}</div>
+            </div>
+        {% endfor %}
+    </div>
+    <div style="text-align: center;font-size: 30px;font-weight: bold;color: white;margin-top: 10px;">Останні Відео
+    </div>
+    <div style="display: flex;justify-content: center;">
+        {% for post in videos %}
+            <div style="color: white;width: 250px;background: #202e3c;border-radius: 10px;padding: 10px;margin: 10px;"
+                 onclick="location.href='{% url 'video' post.id %}'">
+                <div style="font-size: 20px;font-weight: bold;">{{ post.title }}</div>
+                <div><img style="width: 100%;border-radius: 10px;" src="{{ post.title_img.url }}"></div>
+                <div style="color: #507194;font-size: 15px;">{{ post.date|date:'Y-m-d H:i' }}
+                    - {{ post.author.first_name }} {{ post.author.last_name }}</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

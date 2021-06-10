@@ -1,0 +1,35 @@
+.login {
+    width: 400px;
+    margin: auto;
+    display: grid;
+    margin-top: 30px;
+    background: #202e3c;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.login input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+}
+
+.login button {
+    width: 100px;
+    padding: 5px;
+    font-size: 18px;
+    background: #2c3e51;
+    color: white;
+    border: none;
+    border-radius: 10px;
+
+}
+.login button:hover {
+    background: #233242;
+}
+
+.login a {
+    font-size: 15px;
+}
